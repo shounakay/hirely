@@ -2,7 +2,10 @@ import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
-  content: ["./src/**/*.tsx"],
+  content: [
+    "./src/**/*.tsx",
+    "./src/app/(group-name)/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -60,6 +63,19 @@ export default {
           "800": "#184274",
           "900": "#193861",
           "950": "#112440",
+        },
+        "monte-carlo": {
+          "50": "#f4f9f8",
+          "100": "#d9eeea",
+          "200": "#b3dcd6",
+          "300": "#85c2bc",
+          "400": "#5ca5a0",
+          "500": "#428a86",
+          "600": "#336e6c",
+          "700": "#2c5958",
+          "800": "#274848",
+          "900": "#243d3d",
+          "950": "#102323",
         },
 
         //theme colors

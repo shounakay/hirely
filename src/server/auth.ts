@@ -4,7 +4,8 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import GitHubProvider from "next-auth/providers/github";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 import { env } from "@/env";
 import { db } from "@/server/db";
@@ -44,12 +45,46 @@ export const authOptions: NextAuthOptions = {
         id: user.id,
       },
     }),
+    jwt: (jwtProps) => {
+      console.log("jwtProps", jwtProps);
+      return {};
+    },
+    signIn: (signinProps) => {
+      console.log("signinProps", signinProps);
+      return {} as any;
+    },
+  },
+  secret: env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+    maxAge: 2 * 60,
+  },
+  pages: {
+    signIn: "/signin",
+    // signup: '/signup',
+  },
+  theme: {
+    colorScheme: "light",
+    brandColor: "#2c5958",
+    logo: "",
+    buttonText: "#bd4549",
   },
   adapter: PrismaAdapter(db),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
+    }),
+    CredentialsProvider({
+      name: "Creds",
+      credentials: {
+        email: { label: "Email", placeholder: "" },
+        password: { label: "Password", placeholder: "" },
+      },
+      async authorize(credentials, req) {
+        console.log("cred auth", credentials, req);
+        return null;
+      },
     }),
     /**
      * ...add more providers here.
