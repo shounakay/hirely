@@ -59,10 +59,10 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
     maxAge: 2 * 60,
   },
-  pages: {
-    signIn: "/signin",
-    // signup: '/signup',
-  },
+  // pages: {
+  //   signIn: "/signin",
+  //   // signup: '/signup',
+  // },
   theme: {
     colorScheme: "light",
     brandColor: "#2c5958",
@@ -78,15 +78,15 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Creds",
       credentials: {
-        username: { label: "Email", placeholder: "" },
+        email: { label: "Email", placeholder: "" },
         password: { label: "Password", placeholder: "" },
       },
       async authorize(credentials, req) {
         console.log("cred auth", credentials, req);
-        const { email, password } = credentials;
+        const { email, password } = credentials ?? {};
         const user = await db.user.findUnique({ where: { email } });
         const isPasswordMatch = await encrypt.compare(
-          password,
+          password as string,
           user?.password as string,
         );
         console.log("isPasswordMatch", isPasswordMatch);
