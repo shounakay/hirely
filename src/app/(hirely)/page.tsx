@@ -5,7 +5,7 @@ import { CategoryCard } from "../_components/CategoryCard";
 import { TestimonialCard } from "../_components/TestimonialCard";
 import { Testimonials } from "../_components/Testimonials";
 
-const HomePage =  () => {
+const HomePage = () => {
   return (
     <article>
       <section className="flex h-[500px] max-h-fit w-full items-center justify-between gap-20 bg-gradient-to-b from-cyan-100 to-cyan-200 px-16 py-28">
@@ -26,7 +26,7 @@ const HomePage =  () => {
           <Image src={showcase} alt="showcase" width={500} height={500} />
         </aside>
       </section>
-      <section className="bg-waikawa-gray-200 flex w-full flex-col items-center gap-8 px-16 py-12">
+      <section className="flex w-full flex-col items-center gap-8 bg-waikawa-gray-200 px-16 py-12">
         <h6 className="text-2xl">BROWSE BY CATEGORIES</h6>
         <div className="flex w-full flex-wrap gap-28 pb-10">
           {CATEGORY_CARDS.map((card) => (

@@ -13,7 +13,9 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" className="h-full">
       <body className="h-full bg-monte-carlo-700">
-        <TRPCReactProvider cookies={cookies().toString()}>{children}</TRPCReactProvider>
+        <TRPCReactProvider cookies={cookies().toString()}>
+          {children}
+        </TRPCReactProvider>
       </body>
     </html>
   );

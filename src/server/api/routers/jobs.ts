@@ -17,8 +17,17 @@ export const jobsRouter = createTRPCRouter({
       });
       return job;
     }),
-    postJob: publicProcedure.input(z.object({name: z.string(), salary: z.string(), type: z.string(), jobDescription: z.string(), domain: z.string()})).mutation(async (opts) => {
-      console.log('opts mutation', opts);
-
-    })
+  postJob: publicProcedure
+    .input(
+      z.object({
+        name: z.string(),
+        salary: z.string(),
+        type: z.string(),
+        jobDescription: z.string(),
+        domain: z.string(),
+      }),
+    )
+    .mutation(async (opts) => {
+      console.log("opts mutation", opts);
+    }),
 });
