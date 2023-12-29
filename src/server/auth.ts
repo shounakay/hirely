@@ -6,7 +6,7 @@ import {
 } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-
+import * as encrypt from "bcrypt";
 import { env } from "@/env";
 import { db } from "@/server/db";
 
@@ -78,11 +78,24 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Creds",
       credentials: {
-        email: { label: "Email", placeholder: "" },
+        username: { label: "Email", placeholder: "" },
         password: { label: "Password", placeholder: "" },
       },
       async authorize(credentials, req) {
         console.log("cred auth", credentials, req);
+        const { email, password } = credentials;
+        const user = await db.user.findUnique({ where: { email } });
+        const isPasswordMatch = await encrypt.compare(
+          password,
+          user?.password as string,
+        );
+        console.log("isPasswordMatch", isPasswordMatch);
+        if (user && isPasswordMatch) {
+          return user;
+        }
+        if (!user) {
+          throw new Error("User not authorized");
+        }
         return null;
       },
     }),
