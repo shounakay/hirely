@@ -6,9 +6,8 @@ import {
 } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-import * as encrypt from "bcrypt";
-import { env } from "@/env";
 import { db } from "@/server/db";
+import { compare } from "bcrypt";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -38,29 +37,55 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
-    jwt: (jwtProps) => {
-      console.log("jwtProps", jwtProps);
-      return {};
+    session: ({ session, user, token, ...rest }) => {
+      console.log("session callback", { session, user, token, rest });
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          // id: user.id,
+          name: token.name,
+          email: token.email,
+        },
+      };
     },
-    signIn: (signinProps) => {
-      console.log("signinProps", signinProps);
-      return {} as any;
+    jwt: ({ token, user, account, isNewUser, trigger, ...rest }) => {
+      console.log("jwtProps", {
+        token,
+        user,
+        account,
+        isNewUser,
+        trigger,
+        rest,
+      });
+      return {
+        ...token,
+        // userId: user?.id,
+        username: user?.name,
+        userEmail: user?.email,
+      };
+    },
+    signIn: ({ user, account, profile, credentials, ...rest }) => {
+      console.log("signin callback", {
+        user,
+        account,
+        profile,
+        credentials,
+        rest,
+      });
+      if (!user) {
+        return false;
+      }
+      return true;
     },
   },
-  secret: env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
-    maxAge: 2 * 60,
+    maxAge: 300,
   },
   // pages: {
-  //   signIn: "/signin",
+  //   signIn: "/auth/signin",
   //   // signup: '/signup',
   // },
   theme: {
@@ -85,7 +110,7 @@ export const authOptions: NextAuthOptions = {
         console.log("cred auth", credentials, req);
         const { email, password } = credentials ?? {};
         const user = await db.user.findUnique({ where: { email } });
-        const isPasswordMatch = await encrypt.compare(
+        const isPasswordMatch = await compare(
           password as string,
           user?.password as string,
         );
