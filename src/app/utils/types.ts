@@ -19,3 +19,9 @@ export const signInFormSchema = z.object({
 export type TSignInFormSchema = z.infer<typeof signInFormSchema>;
 
 export type TSignUpFormSchema = z.infer<typeof signUpFormSchema>;
+
+export type JobLevel =
+  | "Entry Level"
+  | "Senior Level"
+  | "Mid Level"
+  | "Director";
