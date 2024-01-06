@@ -1,42 +1,39 @@
 "use client";
+
 import { useState } from "react";
-import { TestimonialCard } from "./TestimonialCard";
+import { Props as TestimonialProps, TestimonialCard } from "./TestimonialCard";
 import { TESTIMONIAL_CARDS } from "../utils/helper";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 export const Testimonials = () => {
   const [index, setIndex] = useState(0);
-  function incrementIndex() {
-    if (index === TESTIMONIAL_CARDS.length - 1) {
-      setIndex(0);
-    } else {
-      setIndex((index) => index + 1);
-    }
-  }
+  const incrementIndex = () => {
+    setIndex((index) => (index + 1) % TESTIMONIAL_CARDS.length);
+  };
 
-  function decrementIndex() {
-    if (!index) {
-      setIndex(TESTIMONIAL_CARDS.length - 1);
-    } else {
-      setIndex((index) => index - 1);
-    }
-  }
-  //   setInterval(() => {
-  //     incrementIndex();
-  //   }, 3000);
+  const decrementIndex = () => {
+    setIndex(
+      (index) =>
+        (index - 1 + TESTIMONIAL_CARDS.length) % TESTIMONIAL_CARDS.length,
+    );
+  };
+  // setInterval(() => {
+  //   incrementIndex();
+  // }, 3000);
   return (
     <div className="flex items-center justify-center gap-12">
       <button
         className="h-auto w-12 rounded-3xl bg-slate-400 p-3 text-2xl font-semibold hover:bg-slate-600 "
         onClick={decrementIndex}
       >
-        &lt
+        <FaChevronLeft />
       </button>
-      <TestimonialCard {...TESTIMONIAL_CARDS[index]} />
+      <TestimonialCard {...(TESTIMONIAL_CARDS[index] as TestimonialProps)} />
       <button
         className="h-auto w-12 rounded-3xl bg-slate-400 p-3 text-2xl font-semibold hover:bg-slate-600"
         onClick={incrementIndex}
       >
-        &gt
+        <FaChevronRight />
       </button>
     </div>
   );

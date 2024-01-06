@@ -1,7 +1,8 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
+import { BiSolidQuoteAltLeft } from "react-icons/bi";
 
-type Props = {
+export type Props = {
   name: string;
   avatarImg: StaticImageData;
   profession: string;
@@ -15,8 +16,21 @@ export const TestimonialCard = ({
   quote,
 }: Props) => {
   return (
-    <div className="flex w-72 flex-col justify-center gap-8 rounded-md border-2 border-neutral-500 bg-sky-200 px-6 py-4 shadow-xl">
-      <div className="flex items-center gap-4">
+    <section className=" flex w-full flex-col items-center justify-center gap-8 px-6 py-4">
+      <div className="h-24 w-24">
+        <Image src={avatarImg} alt="profile pic" className="rounded-full" />
+      </div>
+      <div className="text-3xl font-extrabold text-sky-800">
+        <BiSolidQuoteAltLeft />
+      </div>
+      <div className="px-6">
+        <p>{quote}</p>
+      </div>
+      <div className=" flex flex-col gap-1">
+        <p className="text-xs">{name}</p>
+        <p className="text-xs">{profession}</p>
+      </div>
+      {/* <div className="flex items-center gap-4">
         <div className="h-14 w-14">
           <Image src={avatarImg} alt="profile pic" className="rounded-[36px]" />
         </div>
@@ -26,9 +40,9 @@ export const TestimonialCard = ({
         </div>
       </div>
       <span className="inline-block text-3xl font-extrabold text-sky-800">
-        "
+        <BiSolidQuoteAltLeft value={{ color: "red", fontSize: "24px" }} />
       </span>
-      <p className="text-sm">{quote}</p>
-    </div>
+      <p className="text-sm">{quote}</p> */}
+    </section>
   );
 };

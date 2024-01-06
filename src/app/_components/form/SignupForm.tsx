@@ -27,7 +27,7 @@ export const SignupForm = () => {
     const result = mutate(data);
     console.log("result", result);
     reset();
-    router.push("/signin");
+    router.push("/api/auth/signin");
   };
 
   return (
