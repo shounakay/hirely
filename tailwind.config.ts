@@ -1,3 +1,4 @@
+import { courgette } from "@/app/(hirely)/layout";
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -9,7 +10,25 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: [
+          "var(--font-raleway)",
+          // "var(--font-courgette)",
+          ...fontFamily.sans,
+        ],
+        courgette: '"var(--font-courgette", "sans"',
+      },
+      backgroundImage: {
+        "radial-gradient": "radial-gradient(10px,currentColor 94%,#0000)",
+      },
+      animation: {
+        animateTestiCard: "cardAppear 2s ease-in 0.3s 1 normal both",
+      },
+      listStyleImage: {
+        checkmark: 'url("/check.png")',
+      },
+      screens: {
+        xss: "340px",
+        xs: "440px",
       },
       colors: {
         niagara: {
@@ -131,8 +150,211 @@ export default {
           "900": "#184944",
           "950": "#082b2a",
         },
+
+        // new theme
+        //950
+        tarawera: {
+          "50": "#ebffff",
+          "100": "#ccfdff",
+          "200": "#9ff8ff",
+          "300": "#5df0ff",
+          "400": "#14dcfc",
+          "500": "#00bfe2",
+          "600": "#0098be",
+          "700": "#057999",
+          "800": "#0e617c",
+          "900": "#115068",
+          "950": "#04364a",
+        },
+        //700
+        calypso: {
+          "50": "#edfcfe",
+          "100": "#d2f6fb",
+          "200": "#abebf6",
+          "300": "#71dcef",
+          "400": "#30c3e0",
+          "500": "#14a6c6",
+          "600": "#1485a6",
+          "700": "#176b87",
+          "800": "#1c586e",
+          "900": "#1b4a5e",
+          "950": "#0c2f40",
+        },
+        //500
+        astral: {
+          "50": "#f1f7fa",
+          "100": "#dcebf1",
+          "200": "#bed7e3",
+          "300": "#90bbd0",
+          "400": "#5c96b4",
+          "500": "#427d9d",
+          "600": "#386482",
+          "700": "#33536b",
+          "800": "#30475a",
+          "900": "#2c3d4d",
+          "950": "#192733",
+        },
+        //300
+        "tower-gray": {
+          "50": "#f5f9fa",
+          "100": "#eaf1f4",
+          "200": "#d1e1e6",
+          "300": "#9bbec8",
+          "400": "#7ba9b5",
+          "500": "#5a8f9d",
+          "600": "#477482",
+          "700": "#3a5e6a",
+          "800": "#335059",
+          "900": "#2e444c",
+          "950": "#1f2c32",
+        },
+        //greenish
+        //300
+        downy: {
+          "50": "#f2fbfa",
+          "100": "#d4f3ef",
+          "200": "#a9e6df",
+          "300": "#64ccc5",
+          "400": "#4ab7b4",
+          "500": "#309c9a",
+          "600": "#247d7d",
+          "700": "#216364",
+          "800": "#1e5051",
+          "900": "#1d4344",
+          "950": "#0b2628",
+        },
+
+        lochinvar: {
+          "50": "#f1fcfb",
+          "100": "#cef9f3",
+          "200": "#9ef1e6",
+          "300": "#65e3d7",
+          "400": "#35ccc3",
+          "500": "#1cb0aa",
+          "600": "#159895",
+          "700": "#147170",
+          "800": "#15595a",
+          "900": "#164b4b",
+          "950": "#062b2d",
+        },
+        foam: {
+          "50": "#ecfffc",
+          "100": "#dafffb",
+          "200": "#a3fef6",
+          "300": "#64fcf1",
+          "400": "#1ef2e5",
+          "500": "#02d8ce",
+          "600": "#04b5b6",
+          "700": "#0b9093",
+          "800": "#137277",
+          "900": "#145f65",
+          "950": "#074045",
+        },
+
+        "pattens-blue": {
+          "50": "#f0faff",
+          "100": "#ddf2fd",
+          "200": "#bce9fb",
+          "300": "#80d9f9",
+          "400": "#3dc5f3",
+          "500": "#14afe3",
+          "600": "#078dc2",
+          "700": "#07709d",
+          "800": "#0a5f82",
+          "900": "#0f4e6b",
+          "950": "#0a3247",
+        },
+        //greyish
+        gallery: {
+          "50": "#f8f8f8",
+          "100": "#eeeeee",
+          "200": "#dcdcdc",
+          "300": "#bdbdbd",
+          "400": "#989898",
+          "500": "#7c7c7c",
+          "600": "#656565",
+          "700": "#525252",
+          "800": "#464646",
+          "900": "#3d3d3d",
+          "950": "#292929",
+        },
+        "smalt-blue": {
+          "50": "#f3f7f8",
+          "100": "#e1eaec",
+          "200": "#c7d7da",
+          "300": "#a0bcc0",
+          "400": "#71979f",
+          "500": "#577d86",
+          "600": "#4a6770",
+          "700": "#40565e",
+          "800": "#3a4a50",
+          "900": "#343f45",
+          "950": "#1f282d",
+        },
+        "chathams-blue": {
+          "50": "#f4f7fb",
+          "100": "#e7eff7",
+          "200": "#cadded",
+          "300": "#9bc1de",
+          "400": "#66a1ca",
+          "500": "#4285b5",
+          "600": "#316b98",
+          "700": "#265073",
+          "800": "#254967",
+          "900": "#233f57",
+          "950": "#182939",
+        },
+
+        "chrome-white": {
+          "50": "#f6faeb",
+          "100": "#ecf4d6",
+          "200": "#d8e9ad",
+          "300": "#bdd97d",
+          "400": "#a2c754",
+          "500": "#84ac36",
+          "600": "#668927",
+          "700": "#4e6922",
+          "800": "#405420",
+          "900": "#37481f",
+          "950": "#1c270c",
+        },
       },
     },
+    keyframes: {
+      cardAppear: {
+        from: {
+          opacity: "0",
+          translateX: "60px",
+        },
+        "100%": {
+          opacity: "1",
+          translateX: "0px",
+        },
+      },
+      l18: {
+        "33%": {
+          inset: "-10px",
+          transform: "rotate(0deg)",
+        },
+        "66%": {
+          inset: "-10px",
+          transform: "rotate(90deg)",
+        },
+        "100%": {
+          inset: "0",
+          transform: "rotate(90deg)",
+        },
+      },
+    },
+    animation: {
+      l18: "l18 1.5s infinite cubic-bezier(0.3,1,0,1)",
+    },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-pseudo-elements")({
+      customPseudoClasses: ["before"],
+      contentUtilities: true,
+      emptyContent: false,
+    }),
+  ],
 } satisfies Config;
