@@ -1,29 +1,24 @@
 import { api } from "@/trpc/server";
 import React from "react";
 import { JobRow } from "../../_components/JobRow";
+import { getServerAuthSession } from "@/server/auth";
+import { JobSearch } from "@/app/_components/JobSearch";
 
 const AllJobsPage = async () => {
-  const allJobs = await api.jobs.getAllJobs.query();
-  // console.log('add a job', await api.jobs.postJob.mutate({salary: '400000', type: 'Full Time', domain: 'HR', jobDescription: 'Smile', name: 'Sr HR Manager'}))
-  console.log("all Jobs", allJobs);
+  const session = await getServerAuthSession();
+  console.log("session in jobs page", session);
+  // const allJobs = await api.jobs.getAllJobs.query();
   return (
-    <section className="flex min-h-full flex-col items-center gap-8 bg-stone-300 px-4 py-14">
-      <div className="flex gap-4">
-        <input
-          type="text"
-          placeholder="Search for skills, role, etc"
-          name="jobSearch"
-          className="w-72 rounded-lg border-2 px-1 py-1"
-        />
-        <button className=" rounded-md bg-sky-700 px-6 py-1 text-sm text-stone-100 hover:bg-sky-300">
-          Search
-        </button>
+    <section className="bg-foam-100 flex min-h-full flex-col items-center gap-8 px-4 py-14">
+      <div>
+        <h4 className="text-2xl font-semibold text-neutral-700">
+          Find your{" "}
+          <span className=" border-b-4 border-spring-rain-500 bg-gradient-to-r from-sky-300 to-sky-600 bg-clip-text text-transparent">
+            dream job
+          </span>
+        </h4>
       </div>
-      <article className="mx-auto w-[800px]">
-        {allJobs.map((job) => (
-          <JobRow {...job} />
-        ))}
-      </article>
+      <JobSearch />
     </section>
   );
 };
